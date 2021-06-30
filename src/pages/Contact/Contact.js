@@ -19,9 +19,9 @@ export default function Contact() {
     const query = new Contacts();
     query.set("email", email);
     query.set("subject", subject);
-    query.set("message", message);
+    query.set("messages", message);
     query.save().then((res) => {
-      console.log(res);
+      alert("sent");
     });
   };
   return (

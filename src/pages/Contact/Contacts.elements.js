@@ -12,7 +12,7 @@ export const Pic = styled.img`
   border-radius: 10px;
 `;
 
-export const Form = styled.form`
+export const Form = styled.div`
   margin-top: 20px;
   display: flex;
   justify-content: center;

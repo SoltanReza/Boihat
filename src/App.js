@@ -14,6 +14,7 @@ import Videos from "./pages/Videos/Videos";
 import { Container } from "globalStyles";
 import AdminLogin from "pages/AdminLogin/AdminLogin";
 import UploadPage from "pages/UploadPage/UploadPage";
+import ContactMessages from "pages/ContactMessages/ContactMessages";
 
 const Parse = require("parse");
 
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/discography" component={Discography} />
           <Route path="/admin/login" component={AdminLogin} />
           <ProtectedRoute path="/admin/upload" component={UploadPage} />
+          <ProtectedRoute path="/admin/contact" component={ContactMessages} />
           <Route exact path="/" component={HomePage} />
         </Switch>
       </Container>
