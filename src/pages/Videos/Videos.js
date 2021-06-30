@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { VideosWrapper, Container } from "./Videos.elements";
 import ReactPlayer from "react-player/youtube";
+import { trackPromise } from "react-promise-tracker";
+import { LoadingIndicator } from "components";
 const Parse = require("parse");
 
 function Videos() {
@@ -8,14 +10,17 @@ function Videos() {
   const fetchVideos = () => {
     const Videos = Parse.Object.extend("Videos");
     const query = new Parse.Query(Videos);
-    query.find().then((res) => {
-      const arr = [];
-      res.forEach((v) => {
-        arr.push(v.get("url"));
-      });
-      console.log(res);
-      setVideos(arr);
-    });
+    query.descending("createdAt");
+    trackPromise(
+      query.find().then((res) => {
+        const arr = [];
+        res.forEach((v) => {
+          arr.push(v.get("url"));
+        });
+        console.log(res);
+        setVideos(arr);
+      })
+    );
   };
   useEffect(() => {
     fetchVideos();
@@ -23,6 +28,7 @@ function Videos() {
   return (
     <Container>
       <VideosWrapper>
+        <LoadingIndicator />
         {videos &&
           videos.map((u) => {
             return <ReactPlayer style={{ maxWidth: "500px" }} url={u} />;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BigCard,
   BigCardTextContainer,
@@ -11,11 +11,44 @@ import { Button } from "globalStyles";
 const Parse = require("parse");
 
 export default function Discography() {
+  const [musicsArr, setMusicsArr] = useState([]);
+  const [bigCard, setBigcard] = useState();
+
   const fetchVideos = () => {
-    const Videos = Parse.Object.extend("Videos");
-    const query = new Parse.Query(Videos);
+    const Musics = Parse.Object.extend("Musics");
+    const query = new Parse.Query(Musics);
+    query.descending("createdAt");
     query.find().then((res) => {
-      console.log(res);
+      let items = [];
+      for (let j = 0; j < res.length; j++) {
+        const i = res[j];
+
+        if (j === 0) {
+          setBigcard(
+            <BigCard>
+              <img src={i.get("cover").url()} alt="track cover" />
+              <BigCardTextContainer>
+                <h3>{i.get("title")}</h3>
+                <p>{i.get("description")}</p>
+                <a href={i.get("url")}>
+                  {" "}
+                  <Button>Listen Now</Button>
+                </a>
+              </BigCardTextContainer>
+            </BigCard>
+          );
+        } else {
+          items.push(
+            <Card
+              img={i.get("cover")}
+              trackName={i.get("title")}
+              description={i.get("description")}
+              link={i.get("url")}
+            />
+          );
+        }
+      }
+      setMusicsArr(items);
     });
   };
   useEffect(() => {
@@ -23,57 +56,9 @@ export default function Discography() {
   }, []);
   return (
     <Container>
-      <BigCard>
-        <img src={Hajitoon} alt="track cover" />
-        <BigCardTextContainer>
-          <h3>Track name</h3>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis
-            dolores quo nisi reiciendis porro? Necessitatibus esse mollitia
-            repellat eaque aperiam, molestiae, veritatis dignissimos rerum
-            exercitationem ullam, quaerat dolore optio voluptate.
-          </p>
-          <Button>Listen Now</Button>
-        </BigCardTextContainer>
-      </BigCard>
+      {bigCard}
 
-      <CardsContainer>
-        <Card
-          img={Hajitoon}
-          trackName="t name"
-          description="desssssssssssssss"
-        />
-        <Card
-          img={Hajitoon}
-          trackName="t name"
-          description="desssssssssssssss"
-        />
-        <Card
-          img={Hajitoon}
-          trackName="t name"
-          description="desssssssssssssss"
-        />
-        <Card
-          img={Hajitoon}
-          trackName="t name"
-          description="desssssssssssssss"
-        />
-        <Card
-          img={Hajitoon}
-          trackName="t name"
-          description="desssssssssssssss"
-        />
-        <Card
-          img={Hajitoon}
-          trackName="t name"
-          description="desssssssssssssss"
-        />
-        <Card
-          img={Hajitoon}
-          trackName="t name"
-          description="desssssssssssssss"
-        />
-      </CardsContainer>
+      <CardsContainer>{musicsArr}</CardsContainer>
     </Container>
   );
 }

@@ -7,7 +7,7 @@ import {
   Route,
   useRouteMatch,
 } from "react-router-dom";
-import { Navbar, Footer } from "../src/components/index";
+import { Navbar, Footer, ProtectedRoute } from "../src/components/index";
 import Contact from "./pages/Contact/Contact";
 import Discography from "./pages/Discography/Discography";
 import Videos from "./pages/Videos/Videos";
@@ -29,7 +29,7 @@ export default function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/discography" component={Discography} />
           <Route path="/admin/login" component={AdminLogin} />
-          <Route path="/admin/upload" component={UploadPage} />
+          <ProtectedRoute path="/admin/upload" component={UploadPage} />
           <Route exact path="/" component={HomePage} />
         </Switch>
       </Container>

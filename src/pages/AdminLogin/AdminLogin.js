@@ -1,10 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from "globalStyles";
+import { useHistory } from "react-router-dom";
+
+const Parse = require("parse");
+
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const handleClick = () => {};
+  const history = useHistory();
+  const handleLogin = () => {
+    Parse.User.logIn(username, password)
+      .then((res) => {
+        history.push("/admin/upload");
+      })
+      .catch((err) => {
+        alert("invalid user pass!!!");
+      });
+  };
   return (
     <Container>
       <Form>
@@ -21,7 +34,7 @@ export default function AdminLogin() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <FormButton onClick={handleClick} type="submit">
+        <FormButton onClick={handleLogin} type="submit">
           Login
         </FormButton>
       </Form>
@@ -35,7 +48,7 @@ const Container = styled.div`
   align-items: center;
   height: 84vh;
 `;
-const Form = styled.form`
+const Form = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
