@@ -7,7 +7,10 @@ export default function Navbar(props) {
   const location = useLocation();
   return (
     <Nav>
-      <h2>BOIHAT</h2>
+      <StyledLink to="/">
+        <h2>BOIHAT</h2>
+      </StyledLink>
+
       <ul>
         <Li active={location.pathname === "/" ? true : false}>
           <StyledLink to="/">Home</StyledLink>

@@ -8,10 +8,17 @@ export const FooterWrapper = styled.div`
   border-top: 1px solid #d7d7d7;
 
   @media screen and (max-width: 1008px) {
+    font-size: 0.9em;
   }
   @media screen and (max-width: 640px) {
     font-size: 0.8em;
   }
+`;
+
+export const IconsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Icon = styled.img`
