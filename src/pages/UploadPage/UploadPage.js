@@ -14,11 +14,13 @@ export default function UploadPage() {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
+  const [beatstars, setBeatstars] = useState(false);
   const [img, setImg] = useState();
   const [checked, setChecked] = useState(false);
   const FileRef = useRef(null);
   const Videos = Parse.Object.extend("Videos");
   const Musics = Parse.Object.extend("Musics");
+  const Beats = Parse.Object.extend("Beats");
 
   const handleYoutube = () => {
     const query = new Videos();
@@ -26,7 +28,7 @@ export default function UploadPage() {
     query.set("description", description);
     query.set("url", link);
     query.save().then((res) => {
-      console.log(res);
+      alert("uploaded");
     });
   };
   const handleMusic = () => {
@@ -37,12 +39,23 @@ export default function UploadPage() {
     const file = new Parse.File(img.name, img);
     query.set("cover", file);
     query.save().then((res) => {
-      console.log(res);
+      alert("uploaded");
     });
   };
 
+  const handleBeats = () => {
+    const query = new Beats();
+    query.set("title", title);
+    query.set("description", description);
+    query.set("url", link);
+    const file = new Parse.File(img.name, img);
+    query.set("cover", file);
+    query.save().then((res) => {
+      alert("uploaded");
+    });
+  };
   const handleSubmit = () => {
-    checked ? handleYoutube() : handleMusic();
+    checked ? handleYoutube() : handleMusicClass();
   };
   const handleClick = (e) => {
     FileRef.current.click();
@@ -51,6 +64,13 @@ export default function UploadPage() {
   const handleSwitch = () => {
     setChecked(!checked);
   };
+  const handleBeatstars = () => {
+    setBeatstars(!beatstars);
+  };
+  const handleMusicClass = () => {
+    beatstars ? handleBeats() : handleMusic();
+  };
+
   const handleImg = (event) => {
     setImg(event.target.files[0]);
   };
@@ -59,6 +79,12 @@ export default function UploadPage() {
       <SwitchContainer>
         Music <Switch onChange={handleSwitch} checked={checked} /> YOUTUBE
       </SwitchContainer>
+      {!checked && (
+        <SwitchContainer>
+          Discography <Switch onChange={handleBeatstars} checked={beatstars} />
+          Beatstore
+        </SwitchContainer>
+      )}
       <Input
         value={title}
         onChange={(e) => setTitle(e.target.value)}

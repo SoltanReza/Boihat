@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { VideosWrapper, Container } from "./Videos.elements";
+import { VideosWrapper, Container, VideoPlayer } from "./Videos.elements";
 import ReactPlayer from "react-player/youtube";
 import { trackPromise } from "react-promise-tracker";
 import { LoadingIndicator } from "components";
@@ -31,7 +31,7 @@ function Videos() {
         <LoadingIndicator />
         {videos &&
           videos.map((u) => {
-            return <ReactPlayer style={{ maxWidth: "500px" }} url={u} />;
+            return <VideoPlayer url={u} />;
           })}
       </VideosWrapper>
     </Container>

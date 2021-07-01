@@ -70,7 +70,6 @@ export const CardsContainer = styled.div`
   margin-top: 50px;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
 `;
 
 export const Card = styled.div``;

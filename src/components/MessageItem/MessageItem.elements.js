@@ -12,4 +12,11 @@ export const Container = styled.div`
   span {
     color: gray;
   }
+  @media screen and (max-width: 640px) {
+    h3 {
+      font-size: 0.8em;
+    }
+    p {
+    }
+  }
 `;

@@ -4,23 +4,23 @@ import {
   BigCardTextContainer,
   CardsContainer,
   Container,
-} from "./Discography.elements";
+} from "./BeatStore.elements";
 import { Card, LoadingIndicator } from "components/index";
-import Hajitoon from "assets/Hajitoon.jpg";
 import { Button } from "globalStyles";
 import { trackPromise } from "react-promise-tracker";
 const Parse = require("parse");
 
-export default function Discography() {
-  const [musicsArr, setMusicsArr] = useState([]);
+export default function BeatStore() {
+  const [beatArr, setBeatArr] = useState([]);
   const [bigCard, setBigcard] = useState();
 
   const fetchVideos = () => {
-    const Musics = Parse.Object.extend("Musics");
-    const query = new Parse.Query(Musics);
+    const Beats = Parse.Object.extend("Beats");
+    const query = new Parse.Query(Beats);
     query.descending("createdAt");
     trackPromise(
       query.find().then((res) => {
+        console.log(res);
         let items = [];
         for (let j = 0; j < res.length; j++) {
           const i = res[j];
@@ -33,7 +33,6 @@ export default function Discography() {
                   <h3>{i.get("title")}</h3>
                   <p>{i.get("description")}</p>
                   <a href={i.get("url")}>
-                    {" "}
                     <Button>Listen Now</Button>
                   </a>
                 </BigCardTextContainer>
@@ -50,7 +49,7 @@ export default function Discography() {
             );
           }
         }
-        setMusicsArr(items);
+        setBeatArr(items);
       })
     );
   };
@@ -61,7 +60,7 @@ export default function Discography() {
     <Container>
       {bigCard}
       <LoadingIndicator />
-      <CardsContainer>{musicsArr}</CardsContainer>
+      <CardsContainer>{beatArr}</CardsContainer>
     </Container>
   );
 }
