@@ -19,7 +19,7 @@ import ContactMessages from "pages/ContactMessages/ContactMessages";
 const Parse = require("parse");
 
 Parse.initialize("Haatef-site");
-Parse.serverURL = process.env.REACT_APP_SERVER_URL;
+Parse.serverURL = "http://51.210.100.233:1336/parse";
 export default function App() {
   return (
     <Router>
