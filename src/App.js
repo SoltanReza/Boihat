@@ -27,11 +27,10 @@ export default function App() {
       <Navbar />
       <Container>
         <Switch>
-          <Route path="/videos" component={Videos} />
+          <Route path="/kits" component={Videos} />
           <Route path="/contact" component={Contact} />
           <Route path="/discography" component={Discography} />
           <Route path="/beatstore" component={BeatStore} />
-
           <Route path="/admin/login" component={AdminLogin} />
           <ProtectedRoute path="/admin/upload" component={UploadPage} />
           <ProtectedRoute path="/admin/contact" component={ContactMessages} />
