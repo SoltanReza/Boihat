@@ -19,7 +19,7 @@ export default function Navbar(props) {
           <StyledLink to="/discography">Discography</StyledLink>
         </Li>
         <Li active={location.pathname === "/beatstore" ? true : false}>
-          <StyledLink to="/beatstore">BeatStore</StyledLink>
+          <StyledLink to="/beatstore">Beat store</StyledLink>
         </Li>
         <Li active={location.pathname === "/kits" ? true : false}>
           <StyledLink to="/videos">Kits</StyledLink>
